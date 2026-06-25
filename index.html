@@ -2,7 +2,6 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <!-- Diperbarui untuk dukungan notch / safe-area HP -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Financial Dashboard - Ultimate Edition</title>
     
@@ -44,11 +43,10 @@
         
         input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         
-        /* Body tidak lagi di-lock (dihilangkan overflow-hidden) agar bisa di-scroll normal */
         body { 
             background-color: #0c331f; 
             background-image: radial-gradient(circle at 50% 0%, #154c30 0%, #0c331f 70%); 
-            background-attachment: fixed; /* Agar background tidak putus saat di-scroll */
+            background-attachment: fixed;
             overscroll-behavior-y: none; 
             transition: background-color 0.3s; 
             min-height: 100vh;
@@ -64,8 +62,7 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<!-- Mengubah styling Body untuk membebaskan scroll -->
-<body class="text-slate-800 dark:text-slate-200 antialiased min-h-screen w-full flex flex-col items-center justify-start text-sm transition-colors duration-300">
+<body class="text-slate-800 dark:text-slate-200 antialiased min-h-screen w-full flex flex-col items-center justify-start text-[13px] transition-colors duration-300">
 
     <script>
         if (localStorage.getItem('bizdash_theme') === 'dark') {
@@ -78,15 +75,15 @@
 
     <!-- CUSTOM CONFIRM MODAL -->
     <div id="custom-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900 bg-opacity-50 dark:bg-opacity-80 backdrop-blur-sm">
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-2xl w-[85%] max-w-xs transform transition-all text-center border dark:border-slate-700">
-            <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-500/20 text-red-500 flex items-center justify-center mx-auto mb-4">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+        <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-2xl w-[85%] max-w-xs transform transition-all text-center border dark:border-slate-700">
+            <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-500/20 text-red-500 flex items-center justify-center mx-auto mb-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
             </div>
-            <h3 id="modal-title" class="text-lg font-bold text-slate-800 dark:text-white mb-2">Konfirmasi</h3>
-            <p id="modal-text" class="text-sm text-slate-500 dark:text-slate-400 mb-6">Apakah Anda yakin?</p>
-            <div class="flex gap-3 justify-center">
-                <button onclick="closeModal()" class="px-5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm">Batal</button>
-                <button onclick="executeModal()" class="px-5 py-2.5 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition-colors shadow-md text-sm">Hapus</button>
+            <h3 id="modal-title" class="text-base font-bold text-slate-800 dark:text-white mb-1.5">Konfirmasi</h3>
+            <p id="modal-text" class="text-[13px] text-slate-500 dark:text-slate-400 mb-5">Apakah Anda yakin?</p>
+            <div class="flex gap-2 justify-center">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-xs">Batal</button>
+                <button onclick="executeModal()" class="px-4 py-2 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition-colors shadow-md text-xs">Hapus</button>
             </div>
         </div>
     </div>
@@ -94,30 +91,33 @@
     <!-- IMAGE PREVIEW MODAL -->
     <div id="image-modal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black bg-opacity-90 backdrop-blur-sm" onclick="closeImageModal()">
         <img id="image-modal-content" src="" class="max-w-[90%] max-h-[90%] rounded-lg shadow-2xl object-contain">
-        <button class="absolute top-6 right-6 text-white p-2 bg-white/20 rounded-full hover:bg-white/40"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+        <button class="absolute top-5 right-5 text-white p-2 bg-white/20 rounded-full hover:bg-white/40"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
     </div>
 
     <!-- LOGIN SCREEN -->
     <div id="login-screen" class="absolute inset-0 z-50 flex items-center justify-center bg-brand-900 bg-opacity-95 dark:bg-slate-950 dark:bg-opacity-95 backdrop-blur-md transition-opacity duration-300">
-        <div class="bg-white dark:bg-slate-800 p-7 rounded-3xl shadow-2xl w-[90%] max-w-sm border dark:border-slate-700">
-            <div class="text-center mb-7">
-                <div class="w-16 h-16 bg-brand-50 dark:bg-brand-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-500 shadow-inner">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-2xl w-[85%] max-w-sm border dark:border-slate-700">
+            <div class="text-center mb-6">
+                <!-- LOGO DINAMIS -->
+                <div id="login-logo-container" class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-3 text-brand-500 shadow-inner overflow-hidden relative border border-brand-100 dark:border-slate-700 dark:bg-slate-700">
+                    <span id="login-logo-text" class="text-2xl font-extrabold">B</span>
+                    <img id="login-logo-img" src="" class="hidden w-full h-full object-cover relative z-10">
                 </div>
-                <h1 class="text-2xl font-extrabold text-slate-800 dark:text-white">BizDash Secure</h1>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5">Sistem tersinkronisasi antar perangkat</p>
+                <!-- NAMA DINAMIS -->
+                <h1 id="login-title" class="text-xl font-extrabold text-slate-800 dark:text-white">BizDash Secure</h1>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Sistem tersinkronisasi antar perangkat</p>
             </div>
-            <div class="space-y-4">
+            <div class="space-y-3.5">
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">USERNAME</label>
-                    <input type="text" id="login-user" placeholder="Ketik username..." class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition-all text-sm md:text-base bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white dark:placeholder-slate-400">
+                    <label class="block text-[11px] font-bold text-slate-700 dark:text-slate-300 mb-1">USERNAME</label>
+                    <input type="text" id="login-user" placeholder="Ketik username..." class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition-all text-sm bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white dark:placeholder-slate-400">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">PASSWORD</label>
-                    <input type="password" id="login-pass" placeholder="Ketik password..." class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition-all text-sm md:text-base bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white dark:placeholder-slate-400">
+                    <label class="block text-[11px] font-bold text-slate-700 dark:text-slate-300 mb-1">PASSWORD</label>
+                    <input type="password" id="login-pass" placeholder="Ketik password..." class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition-all text-sm bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white dark:placeholder-slate-400">
                 </div>
-                <button onclick="handleLogin()" id="btn-login" class="w-full bg-slate-800 dark:bg-brand-600 hover:bg-slate-900 dark:hover:bg-brand-500 text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg mt-5 flex items-center justify-center gap-2 text-base">
-                    <svg class="w-5 h-5 animate-spin hidden" id="login-spinner" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <button onclick="handleLogin()" id="btn-login" class="w-full bg-slate-800 dark:bg-brand-600 hover:bg-slate-900 dark:hover:bg-brand-500 text-white font-bold py-3 rounded-xl transition-colors shadow-md mt-4 flex items-center justify-center gap-2 text-[13px]">
+                    <svg class="w-4 h-4 animate-spin hidden" id="login-spinner" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     <span>Masuk Aplikasi</span>
                 </button>
             </div>
@@ -127,124 +127,127 @@
     <!-- MAIN APP SHELL -->
     <div id="app-shell" class="hidden w-full min-h-screen md:max-w-md bg-slate-50 dark:bg-slate-900 md:rounded-[2rem] shadow-2xl flex flex-col relative border-0 md:border-4 border-slate-800 dark:border-slate-950 transition-colors duration-300 mx-auto">
         
-        <!-- HEADER (Dibuat Sticky dan Aman dari Notch atas) -->
-        <header class="sticky top-0 bg-white dark:bg-slate-900 z-40 border-b border-slate-100 dark:border-slate-800 px-5 py-4 flex items-center justify-between shrink-0 transition-colors duration-300 shadow-sm" style="padding-top: max(env(safe-area-inset-top), 16px);">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center text-white font-bold text-sm overflow-hidden shadow-sm" id="header-logo-container">
-                    <span id="header-logo-text" class="text-base font-extrabold">B</span>
-                    <img id="header-logo-img" src="" class="hidden w-full h-full object-cover">
+        <!-- HEADER -->
+        <header class="sticky top-0 bg-white dark:bg-slate-900 z-40 border-b border-slate-100 dark:border-slate-800 px-4 py-3 flex items-center justify-between shrink-0 transition-colors duration-300 shadow-sm" style="padding-top: max(env(safe-area-inset-top), 12px);">
+            <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 bg-brand-500 rounded-xl flex items-center justify-center text-white font-bold text-sm overflow-hidden shadow-sm" id="header-logo-container">
+                    <span id="header-logo-text" class="text-[15px] font-extrabold">B</span>
+                    <img id="header-logo-img" src="" class="hidden w-full h-full object-cover relative z-10">
                 </div>
                 <div>
-                    <h2 id="app-title" class="font-extrabold text-base text-slate-800 dark:text-white leading-tight transition-colors">BizDash</h2>
-                    <p class="text-[10px] text-brand-500 dark:text-brand-400 font-semibold leading-tight flex items-center gap-1.5 mt-0.5">
-                        <span class="w-2 h-2 rounded-full bg-brand-500 dark:bg-brand-400 animate-pulse"></span> Multi-Device Sync Active
+                    <h2 id="app-title" class="font-extrabold text-[15px] text-slate-800 dark:text-white leading-tight transition-colors">BizDash</h2>
+                    <p class="text-[9px] text-brand-500 dark:text-brand-400 font-semibold leading-tight flex items-center gap-1.5 mt-[2px]">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-500 dark:bg-brand-400 animate-pulse"></span> Multi-Device Sync
                     </p>
                 </div>
             </div>
-            <button onclick="switchTab('settings')" class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border-2 border-white dark:border-slate-800 shadow-sm hover:ring-2 hover:ring-brand-500 transition-all focus:outline-none">
+            <button onclick="switchTab('settings')" class="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border-2 border-white dark:border-slate-800 shadow-sm hover:ring-2 hover:ring-brand-500 transition-all focus:outline-none">
                 <img src="https://ui-avatars.com/api/?name=Ikhsan&background=0c331f&color=fff" alt="Settings" class="w-full h-full object-cover">
             </button>
         </header>
 
-        <!-- MAIN CONTENT (Diberi padding bawah ekstra agar bisa discroll lewat Bottom Nav) -->
-        <main class="flex-1 pb-28 relative scroll-smooth bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
-            <div class="p-4 md:p-5 space-y-5">
+        <!-- MAIN CONTENT (Kurangi pb-24 agar nav bisa turun) -->
+        <main class="flex-1 pb-24 relative scroll-smooth bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+            <div class="p-4 space-y-4">
                 
                 <!-- TAB: DASHBOARD -->
-                <div id="tab-dashboard" class="tab-content animate-fade-in block space-y-4">
+                <div id="tab-dashboard" class="tab-content animate-fade-in block space-y-3.5">
                     
                     <!-- Laba Bersih Card -->
-                    <div class="bg-white dark:bg-slate-800 p-6 rounded-[1.25rem] shadow-sm border border-slate-100 dark:border-slate-700 relative overflow-hidden group transition-colors">
-                        <div class="absolute -right-6 -top-6 w-32 h-32 bg-brand-50 dark:bg-brand-500/10 rounded-full blur-2xl opacity-70"></div>
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-[1.25rem] shadow-sm border border-slate-100 dark:border-slate-700 relative overflow-hidden group transition-colors">
+                        <!-- Gradasi Elegan (Diperkuat & ditambah aksen biru tipis) -->
+                        <div class="absolute -right-4 -top-8 w-44 h-44 bg-brand-200 dark:bg-brand-500/30 rounded-full blur-[35px] opacity-70 pointer-events-none"></div>
+                        <div class="absolute right-12 -bottom-10 w-32 h-32 bg-blue-100 dark:bg-blue-500/20 rounded-full blur-[30px] opacity-60 pointer-events-none"></div>
+                        
                         <div class="relative z-10 flex flex-col">
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Laba Bersih Bulan Ini</p>
-                            <h2 id="ui-laba" class="text-4xl font-extrabold text-slate-800 dark:text-white tracking-tight">Rp0</h2>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Laba Bersih Bulan Ini</p>
+                            <h2 id="ui-laba" class="text-3xl md:text-4xl font-extrabold text-slate-800 dark:text-white tracking-tight">Rp0</h2>
                             <div class="absolute bottom-0 right-0">
-                                <span class="inline-flex items-center gap-1 text-xs font-bold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-500/20 px-3 py-1.5 rounded-tl-xl rounded-br-2xl shadow-sm">
+                                <span class="inline-flex items-center gap-1 text-[11px] font-bold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-500/20 px-2.5 py-1 rounded-tl-xl rounded-br-[1.25rem] shadow-sm backdrop-blur-sm border border-brand-100/50 dark:border-brand-500/30">
                                     Margin: <span id="ui-margin">0%</span>
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Mini Wallets -->
-                    <div class="grid grid-cols-3 gap-3">
-                        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col justify-center transition-colors">
-                            <p class="text-[10px] font-bold text-slate-400 mb-1.5">Omzet Cair</p>
-                            <p id="ui-omzet" class="text-sm font-extrabold text-brand-600 dark:text-brand-400 truncate">Rp0</p>
+                    <!-- Mini Wallets (Dengan Warna Background Soft) -->
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <div class="bg-brand-50/60 dark:bg-brand-900/10 p-3.5 rounded-xl shadow-sm border border-brand-100 dark:border-brand-800/30 flex flex-col justify-center transition-colors">
+                            <p class="text-[10px] font-bold text-brand-600/70 dark:text-brand-400/80 mb-1">Omzet Cair</p>
+                            <p id="ui-omzet" class="text-[13px] md:text-sm font-extrabold text-brand-600 dark:text-brand-400 truncate">Rp0</p>
                         </div>
-                        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col justify-center transition-colors">
-                            <p class="text-[10px] font-bold text-slate-400 mb-1.5">Modal / HPP</p>
-                            <p id="ui-modal" class="text-sm font-extrabold text-orange-500 dark:text-orange-400 truncate">Rp0</p>
+                        <div class="bg-orange-50/60 dark:bg-orange-900/10 p-3.5 rounded-xl shadow-sm border border-orange-100 dark:border-orange-800/30 flex flex-col justify-center transition-colors">
+                            <p class="text-[10px] font-bold text-orange-600/70 dark:text-orange-400/80 mb-1">Modal / HPP</p>
+                            <p id="ui-modal" class="text-[13px] md:text-sm font-extrabold text-orange-500 dark:text-orange-400 truncate">Rp0</p>
                         </div>
-                        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col justify-center transition-colors">
-                            <p class="text-[10px] font-bold text-slate-400 mb-1.5">Operasional</p>
-                            <p id="ui-opr" class="text-sm font-extrabold text-blue-500 dark:text-blue-400 truncate">Rp0</p>
+                        <div class="bg-blue-50/60 dark:bg-blue-900/10 p-3.5 rounded-xl shadow-sm border border-blue-100 dark:border-blue-800/30 flex flex-col justify-center transition-colors">
+                            <p class="text-[10px] font-bold text-blue-600/70 dark:text-blue-400/80 mb-1">Operasional</p>
+                            <p id="ui-opr" class="text-[13px] md:text-sm font-extrabold text-blue-600 dark:text-blue-400 truncate">Rp0</p>
                         </div>
                     </div>
 
                     <!-- Main Chart -->
-                    <div class="bg-white dark:bg-slate-800 p-5 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col transition-colors">
-                        <div class="flex justify-between items-center mb-3">
-                             <h3 class="font-bold text-slate-800 dark:text-white text-sm">Trend Omzet vs Profit</h3>
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col transition-colors">
+                        <div class="flex justify-between items-center mb-2.5">
+                             <h3 class="font-bold text-slate-800 dark:text-white text-[13px]">Trend Omzet vs Profit</h3>
                         </div>
-                        <div class="relative h-[220px] w-full">
+                        <div class="relative h-[190px] w-full">
                             <canvas id="trenBisnisChart"></canvas>
                         </div>
                         <!-- Filter Waktu Chart -->
-                        <div class="flex gap-2 mt-4 overflow-x-auto no-scrollbar text-xs">
-                            <button onclick="setChartFilter('1B')" class="chart-filter-btn flex-1 py-2 text-center rounded-xl bg-brand-50 dark:bg-brand-500/20 text-brand-600 dark:text-brand-400 font-bold border border-brand-100 dark:border-brand-500/30 transition-colors shrink-0 px-3" data-filter="1B">1B</button>
-                            <button onclick="setChartFilter('3B')" class="chart-filter-btn flex-1 py-2 text-center rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 font-semibold border border-slate-100 dark:border-slate-600 transition-colors shrink-0 px-3" data-filter="3B">3B</button>
-                            <button onclick="setChartFilter('6B')" class="chart-filter-btn flex-1 py-2 text-center rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 font-semibold border border-slate-100 dark:border-slate-600 transition-colors shrink-0 px-3" data-filter="6B">6B</button>
-                            <button onclick="setChartFilter('1T')" class="chart-filter-btn flex-1 py-2 text-center rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 font-semibold border border-slate-100 dark:border-slate-600 transition-colors shrink-0 px-3" data-filter="1T">1T</button>
-                            <button onclick="setChartFilter('All')" class="chart-filter-btn flex-1 py-2 text-center rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 font-semibold border border-slate-100 dark:border-slate-600 transition-colors shrink-0 px-3" data-filter="All">All</button>
+                        <div class="flex gap-1.5 mt-3 overflow-x-auto no-scrollbar text-[11px]">
+                            <button onclick="setChartFilter('1B')" class="chart-filter-btn flex-1 py-1.5 text-center rounded-lg bg-brand-50 dark:bg-brand-500/20 text-brand-600 dark:text-brand-400 font-bold border border-brand-100 dark:border-brand-500/30 transition-colors shrink-0 px-3" data-filter="1B">1B</button>
+                            <button onclick="setChartFilter('3B')" class="chart-filter-btn flex-1 py-1.5 text-center rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 font-semibold border border-slate-100 dark:border-slate-600 transition-colors shrink-0 px-3" data-filter="3B">3B</button>
+                            <button onclick="setChartFilter('6B')" class="chart-filter-btn flex-1 py-1.5 text-center rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 font-semibold border border-slate-100 dark:border-slate-600 transition-colors shrink-0 px-3" data-filter="6B">6B</button>
+                            <button onclick="setChartFilter('1T')" class="chart-filter-btn flex-1 py-1.5 text-center rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 font-semibold border border-slate-100 dark:border-slate-600 transition-colors shrink-0 px-3" data-filter="1T">1T</button>
+                            <button onclick="setChartFilter('All')" class="chart-filter-btn flex-1 py-1.5 text-center rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-500 dark:text-slate-300 font-semibold border border-slate-100 dark:border-slate-600 transition-colors shrink-0 px-3" data-filter="All">All</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- TAB: INPUT -->
                 <div id="tab-form" class="tab-content hidden animate-fade-in">
-                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 transition-colors">
-                        <h2 class="text-base font-extrabold text-slate-800 dark:text-white mb-5">Catat Transaksi</h2>
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 transition-colors">
+                        <h2 class="text-[15px] font-extrabold text-slate-800 dark:text-white mb-4">Catat Transaksi</h2>
                         
-                        <form id="record-form" class="space-y-5">
-                            <div class="flex p-1.5 bg-slate-100 dark:bg-slate-700 rounded-xl relative transition-colors">
+                        <form id="record-form" class="space-y-4">
+                            <div class="flex p-1 bg-slate-100 dark:bg-slate-700 rounded-xl relative transition-colors">
                                 <input type="hidden" id="inp-jenis" value="income">
-                                <button type="button" id="btn-toggle-income" onclick="setTxType('income')" class="flex-1 py-2.5 text-sm font-bold rounded-lg transition-all shadow-sm bg-white dark:bg-slate-600 text-brand-600 dark:text-brand-400">Pemasukan</button>
-                                <button type="button" id="btn-toggle-expense" onclick="setTxType('expense')" class="flex-1 py-2.5 text-sm font-bold rounded-lg transition-all text-slate-500 dark:text-slate-300">Pengeluaran</button>
+                                <button type="button" id="btn-toggle-income" onclick="setTxType('income')" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all shadow-sm bg-white dark:bg-slate-600 text-brand-600 dark:text-brand-400">Pemasukan</button>
+                                <button type="button" id="btn-toggle-expense" onclick="setTxType('expense')" class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 dark:text-slate-300">Pengeluaran</button>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">TANGGAL</label>
-                                    <input type="date" id="inp-tgl" class="w-full px-4 py-3 text-sm rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white transition-all font-medium">
+                                    <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1">TANGGAL</label>
+                                    <input type="date" id="inp-tgl" class="w-full px-3 py-2.5 text-[13px] rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white transition-all font-medium">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">KATEGORI</label>
-                                    <select id="inp-kat" class="w-full px-4 py-3 text-sm rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white transition-all font-medium appearance-none"></select>
+                                    <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1">KATEGORI</label>
+                                    <select id="inp-kat" class="w-full px-3 py-2.5 text-[13px] rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white transition-all font-medium appearance-none"></select>
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">NOMINAL (Rp)</label>
+                                <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1">NOMINAL (Rp)</label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><span class="text-slate-400 font-bold text-base">Rp</span></div>
-                                    <input type="text" id="inp-nom" placeholder="0" class="w-full pl-11 pr-4 py-3.5 text-2xl font-extrabold rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white dark:placeholder-slate-400 transition-all text-slate-800">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><span class="text-slate-400 font-bold text-[15px]">Rp</span></div>
+                                    <input type="text" id="inp-nom" placeholder="0" class="w-full pl-10 pr-3 py-3 text-xl font-extrabold rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white dark:placeholder-slate-400 transition-all text-slate-800">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">CATATAN</label>
-                                <input type="text" id="inp-ket" placeholder="Cth: Beli bahan baku..." class="w-full px-4 py-3 text-sm rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white dark:placeholder-slate-400 transition-all">
+                                <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1">CATATAN</label>
+                                <input type="text" id="inp-ket" placeholder="Cth: Beli bahan baku..." class="w-full px-3 py-2.5 text-[13px] rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white dark:placeholder-slate-400 transition-all">
                             </div>
 
                             <!-- UPLOAD BUKTI -->
                             <div>
-                                <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">BUKTI (TF / RESI / NOTA)</label>
+                                <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1">BUKTI (TF / RESI / NOTA)</label>
                                 <div class="flex items-center justify-center w-full">
-                                    <label class="flex flex-col items-center justify-center w-full h-24 border-2 border-slate-200 dark:border-slate-600 border-dashed rounded-xl cursor-pointer bg-slate-50 dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors overflow-hidden relative" id="upload-container">
+                                    <label class="flex flex-col items-center justify-center w-full h-20 border-2 border-slate-200 dark:border-slate-600 border-dashed rounded-xl cursor-pointer bg-slate-50 dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors overflow-hidden relative" id="upload-container">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6 z-10" id="upload-placeholder">
-                                            <svg class="w-6 h-6 mb-2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path></svg>
+                                            <svg class="w-5 h-5 mb-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path></svg>
                                             <p class="text-[10px] text-slate-500 dark:text-slate-400 font-semibold" id="upload-text">Upload Foto Bukti</p>
                                         </div>
                                         <img id="upload-preview" src="" class="absolute inset-0 w-full h-full object-cover hidden z-0 opacity-80">
@@ -254,7 +257,7 @@
                                 </div>
                             </div>
 
-                            <button type="button" id="btn-submit" onclick="submitTransaction()" class="w-full bg-slate-800 dark:bg-brand-600 hover:bg-slate-900 dark:hover:bg-brand-500 text-white font-bold py-4 rounded-xl transition-all shadow-md text-sm mt-5">
+                            <button type="button" id="btn-submit" onclick="submitTransaction()" class="w-full bg-slate-800 dark:bg-brand-600 hover:bg-slate-900 dark:hover:bg-brand-500 text-white font-bold py-3 rounded-xl transition-all shadow-md text-[13px] mt-4">
                                 Simpan Data
                             </button>
                         </form>
@@ -262,13 +265,13 @@
                 </div>
 
                 <!-- TAB: HISTORY -->
-                <div id="tab-history" class="tab-content hidden animate-fade-in space-y-4">
+                <div id="tab-history" class="tab-content hidden animate-fade-in space-y-3.5">
                     
                     <div class="flex justify-between items-center px-1">
-                        <h2 class="text-base font-extrabold text-slate-800 dark:text-white">Riwayat & Distribusi</h2>
+                        <h2 class="text-[15px] font-extrabold text-slate-800 dark:text-white">Riwayat & Distribusi</h2>
                         <!-- FILTER RIWAYAT -->
                         <div class="relative">
-                            <select id="hist-filter" onchange="setHistoryFilter()" class="appearance-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-white font-bold text-xs py-2 pl-4 pr-9 rounded-xl outline-none focus:ring-1 focus:ring-brand-500 shadow-sm cursor-pointer transition-colors">
+                            <select id="hist-filter" onchange="setHistoryFilter()" class="appearance-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-white font-bold text-[11px] py-1.5 pl-3 pr-8 rounded-lg outline-none focus:ring-1 focus:ring-brand-500 shadow-sm cursor-pointer transition-colors">
                                 <option value="1M">1 Minggu</option>
                                 <option value="1B" selected>1 Bulan (1B)</option>
                                 <option value="3B">3 Bulan (3B)</option>
@@ -276,103 +279,103 @@
                                 <option value="1T">1 Tahun (1T)</option>
                                 <option value="All">Semua Data</option>
                             </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500 dark:text-slate-400">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500 dark:text-slate-400">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
                         </div>
                     </div>
 
                     <!-- Doughnut Chart -->
-                    <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 relative transition-colors">
-                        <h3 class="font-bold text-slate-800 dark:text-white text-xs mb-3 text-center absolute w-full top-4 left-0">Distribusi Pengeluaran</h3>
-                        <div class="relative h-44 w-full flex justify-center mt-5">
+                    <div class="bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 relative transition-colors">
+                        <h3 class="font-bold text-slate-800 dark:text-white text-[11px] mb-2 text-center absolute w-full top-3 left-0">Distribusi Pengeluaran</h3>
+                        <div class="relative h-40 w-full flex justify-center mt-4">
                             <canvas id="rincianDoughnutChart"></canvas>
                         </div>
                     </div>
 
-                    <!-- Transaction List (Dibuat memanjang alami ke bawah) -->
+                    <!-- Transaction List -->
                     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col min-h-[50vh] transition-colors">
-                        <div class="p-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50 shrink-0 transition-colors rounded-t-2xl">
-                            <h3 class="font-bold text-slate-800 dark:text-white text-sm" id="tx-period-title">Data 1 Bulan Terakhir</h3>
-                            <span class="text-[10px] font-extrabold bg-brand-50 dark:bg-brand-500/20 border border-brand-100 dark:border-brand-500/30 text-brand-600 dark:text-brand-400 px-3 py-1.5 rounded-full shadow-sm" id="tx-count">0 items</span>
+                        <div class="p-3 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50 shrink-0 transition-colors rounded-t-2xl">
+                            <h3 class="font-bold text-slate-800 dark:text-white text-[13px]" id="tx-period-title">Data 1 Bulan Terakhir</h3>
+                            <span class="text-[10px] font-extrabold bg-brand-50 dark:bg-brand-500/20 border border-brand-100 dark:border-brand-500/30 text-brand-600 dark:text-brand-400 px-2.5 py-1 rounded-full shadow-sm" id="tx-count">0 items</span>
                         </div>
-                        <div class="flex-1 p-2" id="ui-tabel">
-                            <div class="text-center p-6 text-sm text-slate-400">Loading data...</div>
+                        <div class="flex-1 p-1.5" id="ui-tabel">
+                            <div class="text-center p-5 text-[13px] text-slate-400">Loading data...</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- TAB: SETTINGS -->
                 <div id="tab-settings" class="tab-content hidden animate-fade-in">
-                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 space-y-6 transition-colors">
+                    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 space-y-5 transition-colors">
                         
                         <!-- Profil (Cloud Synced) -->
-                        <div class="flex items-center gap-5 pb-6 border-b border-slate-100 dark:border-slate-700 transition-colors">
+                        <div class="flex items-center gap-4 pb-5 border-b border-slate-100 dark:border-slate-700 transition-colors">
                             <div class="relative group cursor-pointer shrink-0">
-                                <div id="settings-logo-placeholder" class="w-16 h-16 md:w-20 md:h-20 rounded-2xl border-2 border-slate-100 dark:border-slate-700 shadow-sm overflow-hidden bg-brand-500 flex flex-col items-center justify-center text-white relative">
-                                    <span id="settings-logo-placeholder-text" class="text-3xl font-extrabold">B</span>
-                                    <div class="absolute bottom-0 w-full bg-black/50 text-[10px] text-white text-center py-1 font-bold">UBAH</div>
+                                <div id="settings-logo-placeholder" class="w-16 h-16 rounded-2xl border-2 border-slate-100 dark:border-slate-700 shadow-sm overflow-hidden bg-brand-500 flex flex-col items-center justify-center text-white relative">
+                                    <span id="settings-logo-placeholder-text" class="text-2xl font-extrabold">B</span>
+                                    <div class="absolute bottom-0 w-full bg-black/50 text-[9px] text-white text-center py-0.5 font-bold">UBAH</div>
                                 </div>
-                                <img id="settings-logo-preview" src="" class="hidden w-16 h-16 md:w-20 md:h-20 rounded-2xl border-2 border-slate-100 dark:border-slate-700 shadow-sm object-cover relative">
+                                <img id="settings-logo-preview" src="" class="hidden w-16 h-16 rounded-2xl border-2 border-slate-100 dark:border-slate-700 shadow-sm object-cover relative">
                                 <input type="file" id="inp-logo" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" onchange="handleLogoUpload(event)">
                             </div>
                             <div class="flex-1">
-                                <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1.5">NAMA BISNIS</label>
-                                <input type="text" id="inp-namabisnis" value="BizDash" onchange="savePreferencesCloud()" class="w-full px-4 py-3 text-sm font-bold rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white transition-colors">
+                                <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1">NAMA BISNIS</label>
+                                <input type="text" id="inp-namabisnis" value="BizDash" onchange="savePreferencesCloud()" class="w-full px-3 py-2.5 text-[13px] font-bold rounded-xl border border-slate-200 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none bg-slate-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600 dark:text-white transition-colors">
                             </div>
                         </div>
 
-                        <!-- Notifikasi Email (Cloud Synced) -->
-                        <div class="pb-6 border-b border-slate-100 dark:border-slate-700 transition-colors">
-                            <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-3">PENGATURAN NOTIFIKASI</h4>
-                            <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700 transition-colors">
+                        <!-- Notifikasi Email -->
+                        <div class="pb-5 border-b border-slate-100 dark:border-slate-700 transition-colors">
+                            <h4 class="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-3">PENGATURAN NOTIFIKASI</h4>
+                            <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700 transition-colors">
                                 <div>
-                                    <p class="text-sm font-bold text-slate-800 dark:text-white">Kirim Laporan Otomatis</p>
-                                    <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Bulanan ke: <span class="font-bold text-brand-600 dark:text-brand-400">muhikhsan2600@gmail.com</span></p>
+                                    <p class="text-[13px] font-bold text-slate-800 dark:text-white">Kirim Laporan Otomatis</p>
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Bulanan ke: <span class="font-bold text-brand-600 dark:text-brand-400">muhikhsan2600@gmail.com</span></p>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" id="toggle-autoemail" class="sr-only peer" checked onchange="savePreferencesCloud()">
-                                    <div class="w-11 h-6 bg-slate-300 dark:bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div>
+                                    <div class="w-10 h-5 bg-slate-300 dark:bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-500"></div>
                                 </label>
                             </div>
                         </div>
 
                         <!-- DARK MODE TOGGLE -->
-                        <div class="pb-6 border-b border-slate-100 dark:border-slate-700 transition-colors">
-                            <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-3">TAMPILAN APLIKASI</h4>
-                            <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700 transition-colors">
+                        <div class="pb-5 border-b border-slate-100 dark:border-slate-700 transition-colors">
+                            <h4 class="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-3">TAMPILAN APLIKASI</h4>
+                            <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700 transition-colors">
                                 <div>
-                                    <p class="text-sm font-bold text-slate-800 dark:text-white">Mode Gelap (Dark Mode)</p>
-                                    <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Ubah tema menjadi gelap</p>
+                                    <p class="text-[13px] font-bold text-slate-800 dark:text-white">Mode Gelap (Dark Mode)</p>
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Ubah tema menjadi gelap</p>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" id="toggle-darkmode" class="sr-only peer" onchange="toggleDarkMode(this)">
-                                    <div class="w-11 h-6 bg-slate-300 dark:bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-500"></div>
+                                    <div class="w-10 h-5 bg-slate-300 dark:bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-500"></div>
                                 </label>
                             </div>
                         </div>
 
                         <!-- Export Data -->
-                        <div class="pb-6 border-b border-slate-100 dark:border-slate-700 transition-colors">
-                            <h4 class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-3">UNDUH LAPORAN DATA</h4>
-                            <div class="flex gap-3">
-                                <select id="export-period" class="flex-1 px-4 py-3 text-xs font-bold rounded-xl border border-slate-200 dark:border-slate-600 outline-none bg-slate-50 dark:bg-slate-700 dark:text-white transition-colors">
+                        <div class="pb-5 border-b border-slate-100 dark:border-slate-700 transition-colors">
+                            <h4 class="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-3">UNDUH LAPORAN DATA</h4>
+                            <div class="flex gap-2.5">
+                                <select id="export-period" class="flex-1 px-3 py-2 text-[11px] font-bold rounded-xl border border-slate-200 dark:border-slate-600 outline-none bg-slate-50 dark:bg-slate-700 dark:text-white transition-colors">
                                     <option value="mingguan">Laporan Mingguan</option>
                                     <option value="bulanan">Laporan Bulanan</option>
                                     <option value="tahunan">Laporan Tahunan</option>
                                     <option value="all">Semua Data</option>
                                 </select>
-                                <button onclick="exportCSV()" class="px-5 py-3 bg-slate-800 dark:bg-slate-700 text-white font-bold rounded-xl hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors flex items-center justify-center gap-1.5 text-xs shadow-md border dark:border-slate-600">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg> CSV
+                                <button onclick="exportCSV()" class="px-4 py-2 bg-slate-800 dark:bg-slate-700 text-white font-bold rounded-xl hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors flex items-center justify-center gap-1.5 text-[11px] shadow-md border dark:border-slate-600">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg> CSV
                                 </button>
-                                <button onclick="window.showToast('Membangun PDF...', 'success')" class="px-5 py-3 bg-slate-800 dark:bg-slate-700 text-white font-bold rounded-xl hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors flex items-center justify-center gap-1.5 text-xs shadow-md border dark:border-slate-600">
+                                <button onclick="window.showToast('Membangun PDF...', 'success')" class="px-4 py-2 bg-slate-800 dark:bg-slate-700 text-white font-bold rounded-xl hover:bg-slate-900 dark:hover:bg-slate-600 transition-colors flex items-center justify-center gap-1.5 text-[11px] shadow-md border dark:border-slate-600">
                                     PDF
                                 </button>
                             </div>
                         </div>
                         
                         <!-- Logout Button -->
-                        <button onclick="logout()" class="w-full bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 text-red-600 dark:text-red-400 font-bold py-3.5 rounded-xl transition-all text-sm border border-red-100 dark:border-red-500/20">
+                        <button onclick="logout()" class="w-full bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 text-red-600 dark:text-red-400 font-bold py-3 rounded-xl transition-all text-[13px] border border-red-100 dark:border-red-500/20">
                             Keluar Akun (Logout)
                         </button>
                     </div>
@@ -381,21 +384,21 @@
             </div>
         </main>
 
-        <!-- BOTTOM NAVIGATION (Dibuat Aman dari Notch Bawah) -->
-        <nav class="fixed bottom-0 w-full md:max-w-md bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex justify-around z-40 shadow-[0_-15px_30px_rgba(0,0,0,0.04)] transition-colors duration-300" style="padding-bottom: max(env(safe-area-inset-bottom), 12px);">
-            <button onclick="switchTab('dashboard')" class="nav-btn-mobile flex-1 flex flex-col items-center py-3 text-brand-500 dark:text-brand-400" data-target="dashboard">
-                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                <span class="text-[10px] font-extrabold">HOME</span>
+        <!-- BOTTOM NAVIGATION (Padding bawah dikurangi agar turun) -->
+        <nav class="fixed bottom-0 w-full md:max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 flex justify-around z-40 shadow-[0_-15px_30px_rgba(0,0,0,0.06)] transition-colors duration-300 pb-[max(env(safe-area-inset-bottom),8px)]">
+            <button onclick="switchTab('dashboard')" class="nav-btn-mobile flex-1 flex flex-col items-center py-2 text-brand-500 dark:text-brand-400" data-target="dashboard">
+                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span class="text-[9px] font-extrabold">HOME</span>
             </button>
-            <button onclick="switchTab('form')" class="nav-btn-mobile flex-1 flex flex-col items-center py-3 text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 relative" data-target="form">
-                <div class="absolute -top-6 bg-brand-500 text-white rounded-full p-3.5 shadow-xl border-4 border-white dark:border-slate-900 transition-all active:scale-95">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            <button onclick="switchTab('form')" class="nav-btn-mobile flex-1 flex flex-col items-center py-2 text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 relative" data-target="form">
+                <div class="absolute -top-5 bg-brand-500 text-white rounded-full p-3 shadow-xl border-4 border-white dark:border-slate-900 transition-all active:scale-95">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                 </div>
-                <span class="text-[10px] font-extrabold mt-7">INPUT</span>
+                <span class="text-[9px] font-extrabold mt-6">INPUT</span>
             </button>
-            <button onclick="switchTab('history')" class="nav-btn-mobile flex-1 flex flex-col items-center py-3 text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200" data-target="history">
-                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                <span class="text-[10px] font-extrabold">RIWAYAT</span>
+            <button onclick="switchTab('history')" class="nav-btn-mobile flex-1 flex flex-col items-center py-2 text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200" data-target="history">
+                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <span class="text-[9px] font-extrabold">RIWAYAT</span>
             </button>
         </nav>
     </div>
@@ -421,6 +424,29 @@
             expense: ['Modal Kulakan', 'Operasional', 'Bensin/Transport', 'Gaji/Fee', 'Pengeluaran Lain']
         };
 
+        // --- MENGAMBIL DATA CACHE UNTUK LAYAR LOGIN ---
+        function getInitials(name) {
+            if (!name) return 'B';
+            const words = name.trim().split(/\s+/);
+            if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+            return words[0].substring(0, 1).toUpperCase();
+        }
+
+        function updateLoginScreenFromCache() {
+            const cachedName = localStorage.getItem('cached_biz_name') || 'BizDash Secure';
+            const cachedLogo = localStorage.getItem('cached_biz_logo');
+            
+            document.getElementById('login-title').innerText = cachedName;
+            document.getElementById('login-logo-text').innerText = getInitials(cachedName);
+            
+            if (cachedLogo) {
+                document.getElementById('login-logo-img').src = cachedLogo;
+                document.getElementById('login-logo-img').classList.remove('hidden');
+                document.getElementById('login-logo-text').classList.add('hidden');
+            }
+        }
+        updateLoginScreenFromCache(); // Dipanggil langsung sebelum Firebase nyala
+
         // --- DARK MODE LOGIC ---
         if (localStorage.getItem('bizdash_theme') === 'dark') {
             document.getElementById('toggle-darkmode').checked = true;
@@ -443,11 +469,11 @@
             const toast = document.createElement('div');
             const bgColor = type === 'success' ? 'bg-slate-800 dark:bg-slate-700' : 'bg-red-500';
             const icon = type === 'success' 
-                ? '<svg class="w-5 h-5 text-brand-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>'
-                : '<svg class="w-5 h-5 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>';
+                ? '<svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>'
+                : '<svg class="w-4 h-4 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>';
             
-            toast.className = `flex items-center gap-2.5 px-5 py-3.5 rounded-xl shadow-2xl ${bgColor} border border-slate-700/50 toast-enter pointer-events-auto z-50`;
-            toast.innerHTML = `${icon} <span class="text-sm font-bold text-white">${message}</span>`;
+            toast.className = `flex items-center gap-2 px-4 py-3 rounded-xl shadow-2xl ${bgColor} border border-slate-700/50 toast-enter pointer-events-auto z-50`;
+            toast.innerHTML = `${icon} <span class="text-xs font-bold text-white">${message}</span>`;
             
             container.appendChild(toast);
             setTimeout(() => {
@@ -506,11 +532,11 @@
             const btnInc = document.getElementById('btn-toggle-income');
             const btnExp = document.getElementById('btn-toggle-expense');
             if(type === 'income') {
-                btnInc.className = 'flex-1 py-2.5 text-sm font-bold rounded-lg transition-all shadow-sm bg-white dark:bg-slate-600 text-brand-600 dark:text-brand-400';
-                btnExp.className = 'flex-1 py-2.5 text-sm font-bold rounded-lg transition-all text-slate-500 dark:text-slate-300';
+                btnInc.className = 'flex-1 py-2 text-xs font-bold rounded-lg transition-all shadow-sm bg-white dark:bg-slate-600 text-brand-600 dark:text-brand-400';
+                btnExp.className = 'flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 dark:text-slate-300';
             } else {
-                btnExp.className = 'flex-1 py-2.5 text-sm font-bold rounded-lg transition-all shadow-sm bg-white dark:bg-slate-600 text-slate-800 dark:text-white';
-                btnInc.className = 'flex-1 py-2.5 text-sm font-bold rounded-lg transition-all text-slate-500 dark:text-slate-300';
+                btnExp.className = 'flex-1 py-2 text-xs font-bold rounded-lg transition-all shadow-sm bg-white dark:bg-slate-600 text-slate-800 dark:text-white';
+                btnInc.className = 'flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 dark:text-slate-300';
             }
             const select = document.getElementById('inp-kat'); select.innerHTML = '';
             categories[type].forEach(cat => {
@@ -541,12 +567,11 @@
                     }
                 }
             });
-            // Auto scroll ke atas saat pindah menu
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if(tabId === 'dashboard' || tabId === 'history') { updateAllUI(); }
         };
 
-        // --- KONEKSI FIREBASE ASLI ---
+        // --- KONEKSI FIREBASE ---
         const firebaseConfig = {
             apiKey: "AIzaSyD3DkWCeKAINWrQ4tZFmZfgNEGJDQ3FfdQ",
             authDomain: "bizdash-ikhsan.firebaseapp.com",
@@ -559,7 +584,6 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        // Fallback ID jika tidak di platform Gemini
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-bizdash-id';
 
         window.handleLogin = async function() {
@@ -573,7 +597,6 @@
 
             document.getElementById('login-spinner').classList.remove('hidden');
             try {
-                // Di hosting luar, cukup SignIn Anonymously
                 await signInAnonymously(auth);
             } catch (error) {
                 window.showToast("Gagal terkoneksi ke Cloud", "error");
@@ -628,13 +651,6 @@
             }, (error) => { console.error("Error Setting:", error); });
         }
 
-        function getInitials(name) {
-            if (!name) return 'B';
-            const words = name.trim().split(/\s+/);
-            if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
-            return words[0].substring(0, 1).toUpperCase();
-        }
-
         function applySettingsToUI(name, logoBase64, autoEmailStatus) {
             const displayName = name || 'BizDash';
             document.getElementById('app-title').innerText = displayName;
@@ -646,7 +662,12 @@
             document.getElementById('header-logo-text').innerText = initials;
             document.getElementById('settings-logo-placeholder-text').innerText = initials;
 
+            // Simpan ke Cache agar Layar Login dinamis langsung baca ini saat diload ulang
+            localStorage.setItem('cached_biz_name', displayName);
+
             if(logoBase64) {
+                localStorage.setItem('cached_biz_logo', logoBase64); // Cache
+                
                 document.getElementById('header-logo-img').src = logoBase64;
                 document.getElementById('header-logo-img').classList.remove('hidden');
                 document.getElementById('header-logo-text').classList.add('hidden');
@@ -655,12 +676,16 @@
                 document.getElementById('settings-logo-preview').classList.remove('hidden');
                 document.getElementById('settings-logo-placeholder').classList.add('hidden');
             } else {
+                localStorage.removeItem('cached_biz_logo'); // Hapus cache
+                
                 document.getElementById('header-logo-img').classList.add('hidden');
                 document.getElementById('header-logo-text').classList.remove('hidden');
                 
                 document.getElementById('settings-logo-preview').classList.add('hidden');
                 document.getElementById('settings-logo-placeholder').classList.remove('hidden');
             }
+            // Update juga layar login yang sedang bersembunyi (jaga-jaga kalau di-logout)
+            updateLoginScreenFromCache();
         }
 
         window.savePreferencesCloud = async function() {
@@ -834,7 +859,7 @@
             document.getElementById('ui-modal').innerText = formatRp(totalModal);
             document.getElementById('ui-opr').innerText = formatRp(totalOpr);
             document.getElementById('ui-margin').innerText = `${margin}%`;
-            document.getElementById('ui-laba').className = `text-4xl font-extrabold tracking-tight ${labaBersih >= 0 ? 'text-slate-800 dark:text-white' : 'text-red-500 dark:text-red-400'}`;
+            document.getElementById('ui-laba').className = `text-3xl md:text-4xl font-extrabold tracking-tight ${labaBersih >= 0 ? 'text-slate-800 dark:text-white' : 'text-red-500 dark:text-red-400'}`;
 
             renderHistoryList();
             renderCharts();
@@ -848,7 +873,7 @@
             listContainer.innerHTML = '';
 
             if(filteredTxs.length === 0) {
-                listContainer.innerHTML = '<div class="text-center p-8 text-sm text-slate-400 font-bold">Tidak ada transaksi.</div>'; return;
+                listContainer.innerHTML = '<div class="text-center p-6 text-xs text-slate-400 font-bold">Tidak ada transaksi.</div>'; return;
             }
 
             filteredTxs.forEach(tx => {
@@ -864,30 +889,30 @@
                 const dateStr = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
 
                 const btnBukti = tx.bukti 
-                    ? `<button onclick="openImageModal('${tx.bukti}')" class="text-brand-500 dark:text-brand-400 bg-brand-50 dark:bg-brand-500/20 p-2 rounded-lg hover:bg-brand-100 dark:hover:bg-brand-500/30 flex items-center gap-1 shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></button>` 
+                    ? `<button onclick="openImageModal('${tx.bukti}')" class="text-brand-500 dark:text-brand-400 bg-brand-50 dark:bg-brand-500/20 p-1.5 rounded-lg hover:bg-brand-100 dark:hover:bg-brand-500/30 flex items-center gap-1 shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></button>` 
                     : '';
 
                 const itemHTML = `
-                    <div class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-50 dark:border-slate-700/50 transition-colors group rounded-xl">
-                        <div class="flex items-center gap-3 overflow-hidden">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${iconBg}">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">${iconPath}</svg>
+                    <div class="flex items-center justify-between p-2.5 hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-50 dark:border-slate-700/50 transition-colors group rounded-xl">
+                        <div class="flex items-center gap-2.5 overflow-hidden">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${iconBg}">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">${iconPath}</svg>
                             </div>
                             <div class="truncate">
-                                <h4 class="text-sm font-bold text-slate-800 dark:text-white truncate">${tx.category}</h4>
-                                <div class="flex items-center text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 gap-2 truncate">
+                                <h4 class="text-xs font-bold text-slate-800 dark:text-white truncate">${tx.category}</h4>
+                                <div class="flex items-center text-[9px] text-slate-500 dark:text-slate-400 mt-0.5 gap-1.5 truncate">
                                     <span class="shrink-0 font-bold">${dateStr}</span>
                                     ${tx.notes ? `<span class="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-500 shrink-0"></span><span class="truncate">${tx.notes}</span>` : ''}
                                 </div>
                             </div>
                         </div>
-                        <div class="flex items-center gap-2 shrink-0 pl-2">
+                        <div class="flex items-center gap-2 shrink-0 pl-1">
                             ${btnBukti}
                             <div class="text-right">
-                                <span class="font-bold text-sm block ${colorClass}">${sign}${formatRp(tx.amount)}</span>
+                                <span class="font-bold text-[11px] block ${colorClass}">${sign}${formatRp(tx.amount)}</span>
                             </div>
-                            <button onclick="deleteTransaction('${tx.id}')" class="p-2 text-red-300 dark:text-red-500 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-500/20">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            <button onclick="deleteTransaction('${tx.id}')" class="p-1.5 text-red-300 dark:text-red-500 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-500/20">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
                         </div>
                     </div>
@@ -928,7 +953,7 @@
                             borderWidth: 2.5, 
                             tension: 0.3, 
                             pointBackgroundColor: profitData.map(val => val >= 0 ? '#00a859' : '#ef4444'),
-                            pointBorderColor: isDark ? '#1e293b' : '#ffffff',
+                            pointBorderColor: isDark ? '#1e293b' : '#ffffff', 
                             pointRadius: 4, 
                             pointHoverRadius: 6,
                             fill: {
@@ -962,20 +987,20 @@
                     responsive: true, maintainAspectRatio: false,
                     plugins: {
                         legend: { display: false },
-                        tooltip: { titleFont: { size: 11 }, bodyFont: { size: 11 }, padding: 10,
+                        tooltip: { titleFont: { size: 10 }, bodyFont: { size: 10 }, padding: 8,
                             callbacks: {
                                 label: function(context) { return context.dataset.label + ': Rp ' + formatShortRp(context.parsed.y); }
                             }
                         }
                     },
                     scales: {
-                        x: { grid: { display: false }, ticks: { font: {family: "'Plus Jakarta Sans'", size: 10, weight: 'bold'}, color: textColor, maxTicksLimit: 6 } },
+                        x: { grid: { display: false }, ticks: { font: {family: "'Plus Jakarta Sans'", size: 8, weight: 'bold'}, color: textColor, maxTicksLimit: 6 } },
                         y: { 
                             position: 'right', 
                             display: true, 
                             grid: { color: gridColor, borderDash: [3, 3] },
                             ticks: { 
-                                font: {family: "'Plus Jakarta Sans'", size: 10, weight: 'bold'}, color: textColor,
+                                font: {family: "'Plus Jakarta Sans'", size: 9, weight: 'bold'}, color: textColor,
                                 callback: function(value) { return formatShortRp(value); } 
                             }
                         } 
@@ -1000,14 +1025,14 @@
                         data: expData.length > 0 ? expData : [1],
                         backgroundColor: expData.length > 0 ? ['#00a859', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'] : (isDark ? ['#334155'] : ['#f8fafc']),
                         borderWidth: isDark ? 2 : 0, 
-                        borderColor: isDark ? '#1e293b' : 'transparent',
+                        borderColor: isDark ? '#1e293b' : 'transparent', 
                         hoverOffset: 2
                     }]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false, cutout: '70%',
                     plugins: {
-                        legend: { position: 'right', labels: { usePointStyle: true, boxWidth: 8, font: {family: "'Plus Jakarta Sans'", size: 10, weight: 'bold'}, color: textColor } },
+                        legend: { position: 'right', labels: { usePointStyle: true, boxWidth: 6, font: {family: "'Plus Jakarta Sans'", size: 9, weight: 'bold'}, color: textColor } },
                         tooltip: { callbacks: { label: function(context) { if(expData.length === 0) return 'No data'; return ' Rp ' + formatShortRp(context.parsed); } } }
                     }
                 }
